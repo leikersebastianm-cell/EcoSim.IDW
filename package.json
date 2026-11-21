@@ -1,0 +1,24 @@
+{
+  "name": "ecosim.idw",
+  "version": "1.0.0",
+  "description": "nada especial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leikersebastianm-cell/EcoSim.IDW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leikersebastianm-cell/EcoSim.IDW/issues"
+  },
+  "homepage": "https://github.com/leikersebastianm-cell/EcoSim.IDW#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}
