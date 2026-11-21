@@ -25,31 +25,216 @@
 
   <main class="max-w-5xl mx-auto px-4 py-8 space-y-16">
 
-    <!-- 2. SIMULADOR (Próximo passo!) -->
-    <section id="simulador" class="space-y-4">
-      <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Como práticas sustentáveis transformam a cidade?</h1>
-      <p class="text-slate-600">Ative as medidas abaixo e veja o impacto imediato na paisagem e na qualidade do ar.</p>
-      
-      <!-- Aqui dentro vamos montar a cidade e os 3 controles -->
-      <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-        <p class="text-sm text-slate-400">Palco do simulador em construção...</p>
+        <!-- 2. SIMULADOR -->
+    <section id="simulador" class="space-y-6">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Como práticas sustentáveis transformam a cidade?</h1>
+        <p class="text-slate-600 mt-1">Ative as medidas abaixo e veja o impacto imediato na paisagem e na qualidade do ar.</p>
+      </div>
+
+      <!-- Container principal que controla tudo via CSS (:has) -->
+      <div class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-4 md:p-6 grid gap-6 md:grid-cols-5">
+
+        <!-- PALCO VISUAL DA CIDADE (Ocupa 3 colunas no PC) -->
+        <div class="md:col-span-3 relative h-72 md:h-80 rounded-xl overflow-hidden border border-slate-200 bg-slate-500 transition-colors duration-700
+                    group-has-[#chk-arvores:checked]:bg-sky-300
+                    group-has-[#chk-mobilidade:checked]:bg-sky-300
+                    group-has-[#chk-energia:checked]:bg-sky-400">
+
+          <!-- Camada 1: Fumaça / Poluição (começa visível e vai sumindo conforme ativa os controles) -->
+          <div class="absolute inset-0 bg-slate-700/50 transition-opacity duration-700 pointer-events-none
+                      group-has-[#chk-arvores:checked]:opacity-60
+                      group-has-[#chk-mobilidade:checked]:opacity-60
+                      group-has-[#chk-energia:checked]:opacity-40
+                      group-has-[#chk-arvores:checked]:group-has-[#chk-mobilidade:checked]:group-has-[#chk-energia:checked]:opacity-0">
+            <!-- Nuvens de fumaça simples -->
+            <div class="absolute top-6 left-8 w-24 h-8 bg-slate-600/80 rounded-full blur-xs"></div>
+            <div class="absolute top-10 right-12 w-32 h-10 bg-slate-600/80 rounded-full blur-xs"></div>
+          </div>
+
+          <!-- Camada 2: Energia Limpa (Turbinas eólicas ao fundo + Painéis solares no topo dos prédios) -->
+          <div class="absolute inset-0 opacity-0 transition-opacity duration-500 group-has-[#chk-energia:checked]:opacity-100 pointer-events-none">
+            <!-- Sol limpo -->
+            <div class="absolute top-5 right-6 w-10 h-10 bg-amber-300 rounded-full shadow-md shadow-amber-200"></div>
+            <!-- Painéis solares nos prédios -->
+            <div class="absolute bottom-32 left-12 w-12 h-2 bg-blue-600 border border-sky-200 -skew-x-12"></div>
+            <div class="absolute bottom-40 left-36 w-14 h-2 bg-blue-600 border border-sky-200 -skew-x-12"></div>
+            <div class="absolute bottom-28 right-12 w-12 h-2 bg-blue-600 border border-sky-200 -skew-x-12"></div>
+
+          </div>
+
+          <!-- Camada 3: Prédios Base (Sempre visíveis) -->
+          <div class="absolute bottom-14 inset-x-0 flex items-end justify-around px-8">
+            <div class="w-16 h-32 bg-slate-700 rounded-t-sm p-2 grid grid-cols-2 gap-1.5">
+              <span class="bg-amber-200/80 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+              <span class="bg-amber-200/80 rounded-xs"></span><span class="bg-slate-600 rounded-xs"></span>
+              <span class="bg-amber-200/80 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+            </div>
+            <div class="w-20 h-40 bg-slate-800 rounded-t-sm p-2 grid grid-cols-3 gap-1.5">
+              <span class="bg-amber-200/80 rounded-xs"></span><span class="bg-slate-600 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+              <span class="bg-amber-200/80 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+              <span class="bg-slate-600 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+            </div>
+            <div class="w-16 h-28 bg-slate-700 rounded-t-sm p-2 grid grid-cols-2 gap-1.5">
+              <span class="bg-amber-200/80 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+              <span class="bg-slate-600 rounded-xs"></span><span class="bg-amber-200/80 rounded-xs"></span>
+            </div>
+          </div>
+
+          <!-- Camada 4: Arborização (Árvores na calçada) -->
+          <div class="absolute bottom-14 inset-x-0 flex justify-between px-4 opacity-0 translate-y-2 transition-all duration-500
+                      group-has-[#chk-arvores:checked]:opacity-100 group-has-[#chk-arvores:checked]:translate-y-0 pointer-events-none">
+            <!-- Árvore 1 -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 bg-emerald-600 rounded-full -mb-2"></div>
+              <div class="w-2 h-5 bg-amber-900"></div>
+            </div>
+            <!-- Árvore 2 -->
+            <div class="flex flex-col items-center">
+              <div class="w-12 h-12 bg-emerald-500 rounded-full -mb-2"></div>
+              <div class="w-2.5 h-6 bg-amber-900"></div>
+            </div>
+            <!-- Árvore 3 -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 bg-emerald-600 rounded-full -mb-2"></div>
+              <div class="w-2 h-5 bg-amber-900"></div>
+            </div>
+          </div>
+
+          <!-- Camada 5: Rua e Mobilidade Sustentável (Ciclovia vermelha + faixa) -->
+          <div class="absolute bottom-0 inset-x-0 h-14 bg-zinc-800 border-t-4 border-zinc-400 flex flex-col justify-center">
+            <!-- Ciclovia (aparece quando marca Mobilidade) -->
+            <div class="h-3.5 bg-red-600 w-full opacity-0 transition-opacity duration-500 group-has-[#chk-mobilidade:checked]:opacity-100 flex items-center px-4">
+              <span class="text-[10px] font-bold text-white tracking-widest uppercase">Ciclovia</span>
+            </div>
+            <!-- Faixa tracejada da rua -->
+            <div class="border-t-2 border-dashed border-amber-300/70 my-2"></div>
+          </div>
+
+        </div>
+
+        <!-- PAINEL DE CONTROLES E INDICADOR IQAIR (Ocupa 2 colunas no PC) -->
+        <div class="md:col-span-2 flex flex-col justify-between space-y-5">
+
+          <!-- Indicador de Qualidade do Ar (Muda cor e texto conforme os checkboxes) -->
+          <div class="p-4 rounded-xl border transition-colors duration-500
+                      bg-red-50 border-red-200 text-red-900
+                      group-has-[#chk-arvores:checked]:bg-amber-50 group-has-[#chk-arvores:checked]:border-amber-200 group-has-[#chk-arvores:checked]:text-amber-900
+                      group-has-[#chk-mobilidade:checked]:bg-amber-50 group-has-[#chk-mobilidade:checked]:border-amber-200 group-has-[#chk-mobilidade:checked]:text-amber-900
+                      group-has-[#chk-energia:checked]:bg-amber-50 group-has-[#chk-energia:checked]:border-amber-200 group-has-[#chk-energia:checked]:text-amber-900
+                      group-has-[#chk-arvores:checked]:group-has-[#chk-mobilidade:checked]:group-has-[#chk-energia:checked]:bg-emerald-50
+                      group-has-[#chk-arvores:checked]:group-has-[#chk-mobilidade:checked]:group-has-[#chk-energia:checked]:border-emerald-300
+                      group-has-[#chk-arvores:checked]:group-has-[#chk-mobilidade:checked]:group-has-[#chk-energia:checked]:text-emerald-900">
+            <span class="text-xs font-semibold uppercase tracking-wider opacity-75">Qualidade do Ar (Simulada)</span>
+            
+            <!-- Texto 1: Nenhum marcado -->
+            <p class="text-lg font-bold mt-1 block group-has-[:checked]:hidden">Crítica • Ar poluído</p>
+            
+            <!-- Texto 2: 1 ou 2 marcados -->
+            <p class="text-lg font-bold mt-1 hidden group-has-[:checked]:block
+                      group-has-[#chk-arvores:checked]:group-has-[#chk-mobilidade:checked]:group-has-[#chk-energia:checked]:hidden">
+              Em melhoria • Poluição reduzindo
+            </p>
+            
+            <!-- Texto 3: Todos os 3 marcados -->
+            <p class="text-lg font-bold mt-1 hidden
+                      group-has-[#chk-arvores:checked]:group-has-[#chk-mobilidade:checked]:group-has-[#chk-energia:checked]:block">
+              Excelente • Cidade sustentável
+            </p>
+          </div>
+
+          <!-- Os 3 Controles Independentes (Acessíveis por teclado e toque) -->
+          <div class="space-y-3">
+            <p class="text-sm font-semibold text-slate-700">Ative as medidas urbanas:</p>
+
+            <!-- Controle 1: Arborização -->
+            <label for="chk-arvores" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-500 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-emerald-500">
+              <div>
+                <span class="font-semibold text-slate-800 block">Arborização Urbana</span>
+                <span class="text-xs text-slate-500">Filtra o ar e reduz o calor (Meta 11.7)</span>
+              </div>
+              <input type="checkbox" id="chk-arvores" class="sr-only">
+              <span class="w-11 h-6 bg-slate-300 rounded-full relative transition-colors in-checked:bg-emerald-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-transform in-checked:after:translate-x-5"></span>
+            </label>
+
+            <!-- Controle 2: Mobilidade -->
+            <label for="chk-mobilidade" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-500 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-emerald-500">
+              <div>
+                <span class="font-semibold text-slate-800 block">Mobilidade Sustentável</span>
+                <span class="text-xs text-slate-500">Ciclovias e transporte coletivo (Meta 11.2)</span>
+              </div>
+              <input type="checkbox" id="chk-mobilidade" class="sr-only">
+              <span class="w-11 h-6 bg-slate-300 rounded-full relative transition-colors in-checked:bg-emerald-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-transform in-checked:after:translate-x-5"></span>
+            </label>
+
+            <!-- Controle 3: Energia Limpa -->
+            <label for="chk-energia" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors has-[:checked]:bg-emerald-50 has-[:checked]:border-emerald-500 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-emerald-500">
+              <div>
+                <span class="font-semibold text-slate-800 block">Energia Limpa</span>
+                <span class="text-xs text-slate-500">Painéis solares e renováveis (Meta 7.2)</span>
+              </div>
+              <input type="checkbox" id="chk-energia" class="sr-only">
+              <span class="w-11 h-6 bg-slate-300 rounded-full relative transition-colors in-checked:bg-emerald-600 after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-transform in-checked:after:translate-x-5"></span>
+            </label>
+          </div>
+
+        </div>
       </div>
     </section>
-
-    <!-- 3. DADOS -->
+     <!-- 3. DADOS -->
     <section id="dados" class="space-y-6">
-      <h2 class="text-xl md:text-2xl font-bold text-slate-900">Por que isso importa?</h2>
+      <div>
+        <h2 class="text-xl md:text-2xl font-bold text-slate-900">Por que isso importa?</h2>
+        <p class="text-slate-600 mt-1">Os desafios urbanos atuais e como pequenas mudanças geram impacto real.</p>
+      </div>
+
       <div class="grid gap-4 md:grid-cols-3">
-        <!-- Cartões da OMS, IBGE e Sousa entram aqui -->
+        <!-- Cartão 1: OMS -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full">Saúde Pública • OMS</span>
+          <h3 class="font-bold text-lg text-slate-900 pt-1">99% respiram ar poluído</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Segundo a Organização Mundial da Saúde, quase toda a população mundial respira ar que excede os limites recomendados de poluentes urbanos.
+          </p>
+        </div>
+
+        <!-- Cartão 2: IBGE -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">Urbanização • IBGE</span>
+          <h3 class="font-bold text-lg text-slate-900 pt-1">87% vivem em cidades</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            A maior parte da população brasileira reside em áreas urbanas, o que aumenta a demanda por transporte limpo, áreas verdes e infraestrutura.
+          </p>
+        </div>
+
+        <!-- Cartão 3: Impacto Local / Referência -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Soluções • Cidades</span>
+          <h3 class="font-bold text-lg text-slate-900 pt-1">Menos calor e CO₂</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Corredores verdes, ciclovias e geração solar distribuída reduzem ilhas de calor e melhoram diretamente o bem-estar nos bairros.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- 4. SOBRE O PROJETO -->
-    <section id="sobre" class="space-y-4">
+    <section id="sobre" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
       <h2 class="text-xl md:text-2xl font-bold text-slate-900">Sobre o Projeto</h2>
-      <!-- ODS 11, ODS 7 e equipe entram aqui -->
+      <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+        O <strong>Eco-Simulador</strong> é uma ferramenta educativa interativa desenvolvida na disciplina de Introdução ao Desenvolvimento Web (UFFS) para demonstrar como ações locais contribuem para os Objetivos de Desenvolvimento Sustentável da ONU:
+      </p>
+      <div class="grid gap-3 md:grid-cols-2 pt-1">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="font-bold text-emerald-700 block">ODS 11 — Cidades e Comunidades Sustentáveis</span>
+          <p class="text-sm text-slate-600 mt-1">Foco em transporte sustentável (Meta 11.2), redução do impacto ambiental urbano e acesso a espaços verdes seguros (Meta 11.7).</p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="font-bold text-amber-700 block">ODS 7 — Energia Limpa e Acessível</span>
+          <p class="text-sm text-slate-600 mt-1">Incentivo ao aumento da participação de energias renováveis, como a solar e a eólica, na matriz urbana (Meta 7.2).</p>
+        </div>
+      </div>
     </section>
-
   </main>
 
   <!-- 5. RODAPÉ -->
