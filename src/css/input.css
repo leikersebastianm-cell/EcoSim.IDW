@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+.card-medida {
+  @apply bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:border-emerald-500 hover:bg-emerald-50;
+}
+
